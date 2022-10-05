@@ -1,0 +1,1 @@
+docker run -d -p 8081:80 --name dev-booking-handler --env BookingBrokerHost
