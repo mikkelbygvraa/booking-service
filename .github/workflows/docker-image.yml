@@ -14,24 +14,33 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Login to Docker Hub 
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
       run: 
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        
+        
     - name: Build the BookingProducer Docker image
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 
       run: docker build . --file BookingProducer/Dockerfile --tag ${DOCKER_USER}/booking-service:latest-dev
+      
+      
     - name: Push BookingProducer Docker image to Docker Hub
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
       run: docker push ${DOCKER_USER}/booking-service:latest-dev
+      
+      
     - name: Build the BookingHandler Docker image
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 
       run: docker build . --file BookingHandler/Dockerfile --tag ${DOCKER_USER}/booking-service-handler:latest-dev
+      
+      
     - name: Push BookingHandler Docker image to Docker Hub
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
