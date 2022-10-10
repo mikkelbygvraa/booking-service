@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v3
     
@@ -24,22 +25,26 @@ jobs:
     - name: Build the BookingProducer Docker image
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 
-      run: docker build . --file BookingProducer/Dockerfile --tag ${DOCKER_USER}/booking-service:latest-dev
+      run: 
+        docker build . --file BookingProducer/Dockerfile --tag ${DOCKER_USER}/booking-service:latest-dev
       
       
     - name: Push BookingProducer Docker image to Docker Hub
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      run: docker push ${DOCKER_USER}/booking-service:latest-dev
+      run: 
+        docker push ${DOCKER_USER}/booking-service:latest-dev
       
       
     - name: Build the BookingHandler Docker image
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 
-      run: docker build . --file BookingHandler/Dockerfile --tag ${DOCKER_USER}/booking-service-handler:latest-dev
+      run: 
+        docker build . --file BookingHandler/Dockerfile --tag ${DOCKER_USER}/booking-service-handler:latest-dev
       
       
     - name: Push BookingHandler Docker image to Docker Hub
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      run: docker push ${DOCKER_USER}/booking-service-handler:latest-dev
+      run: 
+        docker push ${DOCKER_USER}/booking-service-handler:latest-dev
