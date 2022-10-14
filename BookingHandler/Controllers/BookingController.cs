@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using BookingHandler.Models;
-using BookingHandler.Services;
+using BookingHandler.Repositories;
 
 namespace BookingHandler.Controllers
 {
