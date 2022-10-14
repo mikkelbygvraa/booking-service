@@ -1,0 +1,22 @@
+services: 
+ booking-service-producer:  
+     image: mikkelbygvraa/booking-service-producer:latest-dev 
+     ports:  
+     - "8080:80" 
+     environment: 
+     - BookingBrokerHost=rabbitmq-dev 
+     depends_on: 
+     - rabbitmq-dev 
+ booking-service-handler: 
+     image: mikkelbygvraa/booking-service-handler:latest-dev 
+     ports: 
+     - "8081:80" 
+     environment: 
+     - BookingBrokerHost=rabbitmq-dev 
+     depends_on: 
+     - rabbitmq-dev 
+ rabbitmq-dev: 
+     image: rabbitmq:management 
+     ports: 
+     - "15672:15672" 
+     - "5672:5672"
