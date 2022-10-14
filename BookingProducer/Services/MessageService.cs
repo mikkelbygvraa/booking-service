@@ -14,27 +14,21 @@ namespace BookingProducer.Services
 
     public class MessageService : IMessageService
     {
-        private readonly IConfiguration _configuration;
         private readonly IConnection _connection;
 
-        private static readonly string hostName = "localhost";
         private static readonly string queueName = "booking";
 
         public MessageService(IConfiguration configuration)
         {
-            _configuration = configuration;
-
             var mqhostname = configuration["BookingBrokerHost"];
 
-            if (String.IsNullOrEmpty(mqhostname))
+            // Hvis mphostname er tom, så falder vi tilbage på localhost. Dette er "dårlig" fejlhåndtering, og er den hurtige løsning.
+            if (string.IsNullOrEmpty(mqhostname))
             {
                 mqhostname = "localhost";
             }
 
-            var factory = new ConnectionFactory
-            {
-                HostName = hostName,
-            };
+            var factory = new ConnectionFactory { HostName = mqhostname };
 
             _connection = factory.CreateConnection();
         }
@@ -46,23 +40,23 @@ namespace BookingProducer.Services
             {
                 // Opretter en kø
                 channel.QueueDeclare(queue: queueName,
-                                      durable: false,
-                                      exclusive: false,
-                                      autoDelete: false,
-                                      arguments: null);
+                                        durable: false,
+                                        exclusive: false,
+                                        autoDelete: false,
+                                        arguments: null);
+
+                // Serialisering af Booking-objekt
+                var body = JsonSerializer.SerializeToUtf8Bytes(booking);
+
+                // Sender 'body'-datastrømmen ind i køen
+                channel.BasicPublish(exchange: "",
+                                        routingKey: queueName,
+                                        basicProperties: null,
+                                        body: body);
+
+                // Udskriver til konsolen, at vi har sendt en booking
+                Console.WriteLine(" [x] Published booking: {0}", booking.BookingId);
             }
-            // Serialisering af Booking-objekt
-            var body = JsonSerializer.SerializeToUtf8Bytes(booking);
-
-            // Sender 'body'-datastrømmen ind i køen
-            channel.BasicPublish(exchange: "",
-                                  routingKey: queueName,
-                                  basicProperties: null,
-                                  body: body);
-
-            // Udskriver til konsolen, at vi har sendt en booking
-            Console.WriteLine(" [x] Published booking: {0}", booking.BookingId);
         }
-
     }
 }
