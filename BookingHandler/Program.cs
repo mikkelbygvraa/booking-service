@@ -1,5 +1,7 @@
 using Microsoft.OpenApi.Models;
 using BookingHandler.Services;
+using BookingHandler.Repositories;
+using BookingHandler.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddSingleton<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IBookingContext, BookingContext>();
 
 var app = builder.Build();
 
