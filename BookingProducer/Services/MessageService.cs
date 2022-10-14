@@ -14,13 +14,23 @@ namespace BookingProducer.Services
 
     public class MessageService : IMessageService
     {
+        private readonly IConfiguration _configuration;
         private readonly IConnection _connection;
 
         private static readonly string hostName = "localhost";
         private static readonly string queueName = "booking";
 
-        public MessageService()
+        public MessageService(IConfiguration configuration)
         {
+            _configuration = configuration;
+
+            var mqhostname = configuration["BookingBrokerHost"];
+
+            if (String.IsNullOrEmpty(mqhostname))
+            {
+                mqhostname = "localhost";
+            }
+
             var factory = new ConnectionFactory
             {
                 HostName = hostName,

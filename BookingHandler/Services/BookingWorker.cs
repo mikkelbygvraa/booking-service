@@ -33,18 +33,18 @@ public class BookingWorker : BackgroundService
         _configuration = configuration;
         _repository = repository;
 
-        var mphostname = configuration["BookingBrokerHost"];
+        var mqhostname = configuration["BookingBrokerHost"];
 
         // Hvis mphostname er tom, så falder vi tilbage på localhost. Dette er "dårlig" fejlhåndtering, og er den hurtige løsning.
-        if (string.IsNullOrEmpty(mphostname))
+        if (string.IsNullOrEmpty(mqhostname))
         {
-            mphostname = "localhost";
+            mqhostname = "localhost";
         }
 
-        var factory = new ConnectionFactory() { HostName = mphostname };
+        var factory = new ConnectionFactory() { HostName = mqhostname };
         _connection = factory.CreateConnection();
 
-        _logger.LogInformation($"Booking worker listening on host at {mphostname}");
+        _logger.LogInformation($"Booking worker listening on host at {mqhostname}");
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
