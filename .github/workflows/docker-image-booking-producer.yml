@@ -28,11 +28,11 @@ jobs:
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }} 
       run: 
-        docker build . --file BookingProducer/Dockerfile --tag ${DOCKER_USER}/booking-service:latest
+        docker build . --file BookingProducer/Dockerfile --tag ${DOCKER_USER}/booking-service:latest-dev
       
       
     - name: Push BookingProducer Docker image to Docker Hub
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
       run: 
-        docker push ${DOCKER_USER}/booking-service:latest
+        docker push ${DOCKER_USER}/booking-service:latest-dev
