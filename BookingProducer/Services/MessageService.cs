@@ -29,7 +29,6 @@ namespace BookingProducer.Services
             }
 
             var factory = new ConnectionFactory { HostName = mqhostname };
-
             _connection = factory.CreateConnection();
         }
 

@@ -13,7 +13,6 @@ namespace BookingHandler.Services;
 public class BookingWorker : BackgroundService
 {
     private readonly ILogger<BookingWorker> _logger;
-    private readonly IConfiguration _configuration;
     private readonly IConnection _connection;
 
     private readonly IBookingRepository _repository;
@@ -30,7 +29,6 @@ public class BookingWorker : BackgroundService
     public BookingWorker(ILogger<BookingWorker> logger, IConfiguration configuration, IBookingRepository repository)
     {
         _logger = logger;
-        _configuration = configuration;
         _repository = repository;
 
         var mqhostname = configuration["BookingBrokerHost"];
