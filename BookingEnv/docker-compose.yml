@@ -1,5 +1,5 @@
-services: 
- booking-service-producer:  
+services:
+    booking-service-producer:  
      image: mikkelbygvraa/booking-service-producer:latest-dev 
      ports:  
      - "8080:80" 
@@ -7,7 +7,8 @@ services:
      - BookingBrokerHost=rabbitmq-dev 
      depends_on: 
      - rabbitmq-dev 
- booking-service-handler: 
+
+    booking-service-handler: 
      image: mikkelbygvraa/booking-service-handler:latest-dev 
      ports: 
      - "8081:80" 
@@ -15,8 +16,21 @@ services:
      - BookingBrokerHost=rabbitmq-dev 
      depends_on: 
      - rabbitmq-dev 
- rabbitmq-dev: 
+     - mongodb
+
+    rabbitmq-dev: 
      image: rabbitmq:management 
      ports: 
      - "15672:15672" 
      - "5672:5672"
+
+    mongodb:
+     image: mongo
+     restart: always
+     ports:
+      - 27017:27017
+     volumes:
+      - ~/mongo:/data/db
+     environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
