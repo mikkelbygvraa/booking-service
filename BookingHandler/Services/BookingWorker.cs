@@ -66,7 +66,7 @@ public class BookingWorker : BackgroundService
             var message = Encoding.UTF8.GetString(body);
 
             // Deserialisering af datastrømmen til et Booking-objekt
-            var booking = JsonSerializer.Deserialize<BookingDTO>(message);
+            var booking = JsonSerializer.Deserialize<Booking>(message);
 
             if (booking is not null)
             {
