@@ -27,7 +27,7 @@ namespace BookingHandler.Data
 
             BookingCollection = db.GetCollection<Booking>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
 
-            SeedData(BookingCollection);
+            // SeedData(BookingCollection);
         }
 
         public IMongoCollection<Booking> BookingCollection { get; }
