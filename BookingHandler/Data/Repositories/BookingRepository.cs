@@ -1,17 +1,23 @@
-﻿using MongoDB.Driver;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using MongoDB.Driver;
 
 using BookingHandler.Models;
 using BookingHandler.Data;
 
-namespace BookingHandler.Repositories
+namespace BookingHandler.Data.Repositories
 {
-    public interface IBookingRepository : IDisposable
+    public interface IBookingRepository
     {
-        Task<IEnumerable<BookingDTO>> GetAll();
-        Task<IEnumerable<BookingDTO>> GetAllByStartDate();
-        Task<BookingDTO> Get(long id);
-        Task Create(BookingDTO booking);
-        Task<bool> Update(BookingDTO booking);
+        Task<IEnumerable<Booking>> GetAll();
+        Task<IEnumerable<Booking>> GetAllByStartDate();
+        Task<Booking> Get(long id);
+
+        Task Create(Booking booking);
+        Task<bool> Update(Booking booking);
         Task<bool> Delete(long id);
     }
 
@@ -27,53 +33,49 @@ namespace BookingHandler.Repositories
         private readonly ILogger<BookingRepository> _logger;
         private readonly IBookingContext _context;
 
-        private List<BookingDTO> _bookings;
-
         public BookingRepository(ILogger<BookingRepository> logger, IBookingContext context)
         {
             _logger = logger;
             _context = context ?? throw new ArgumentNullException(nameof(context));
-
-            _bookings = new List<BookingDTO>();
         }
 
 
-        public async Task<IEnumerable<BookingDTO>> GetAll()
+        public async Task<IEnumerable<Booking>> GetAll()
         {
             return await _context
-                .Bookings
+                .BookingCollection
                 .Find(b => true)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<BookingDTO>> GetAllByStartDate()
+        public async Task<IEnumerable<Booking>> GetAllByStartDate()
         {
             return await _context
-                .Bookings
+                .BookingCollection
                 .Find(b => true)
                 .SortBy(b => b.StartDate)
                 .ToListAsync();
         }
 
-        public async Task<BookingDTO> Get(long id)
+        public async Task<Booking> Get(long id)
         {
             return await _context
-                .Bookings
+                .BookingCollection
                 .Find(b => b.BookingId == id)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task Create(BookingDTO booking)
+        public async Task Create(Booking booking)
         {
             await _context
-                .Bookings
+                .BookingCollection
                 .InsertOneAsync(booking);
         }
 
-        public async Task<bool> Update(BookingDTO booking)
+        public async Task<bool> Update(Booking booking)
         {
             var result = await _context
-                .Bookings
+                .BookingCollection
                 .ReplaceOneAsync(filter: b => b.BookingId == booking.BookingId, replacement: booking);
 
             return result.IsAcknowledged
@@ -83,7 +85,7 @@ namespace BookingHandler.Repositories
         public async Task<bool> Delete(long id)
         {
             var result = await _context
-                .Bookings
+                .BookingCollection
                 .DeleteOneAsync(b => b.BookingId == id);
 
             return result.IsAcknowledged
@@ -91,27 +93,27 @@ namespace BookingHandler.Repositories
         }
 
 
-        #region IDisposable
+        //#region IDisposable
 
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    _bookings.Clear();
-                }
-            }
-            disposed = true;
-        }
+        //private bool disposed = false;
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            _bookings.Clear();
+        //        }
+        //    }
+        //    disposed = true;
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
 
-        #endregion
+        //#endregion
     }
 }

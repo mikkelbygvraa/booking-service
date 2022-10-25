@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 
 using BookingHandler.Models;
-using BookingHandler.Repositories;
+using System.Net;
+using BookingHandler.Data.Repositories;
 
 namespace BookingHandler.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
     {
@@ -15,17 +16,20 @@ namespace BookingHandler.Controllers
 
         public BookingController(ILogger<BookingController> logger, IBookingRepository repository)
         {
-            _logger = logger;
-            _repository = repository;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        // GET api/<BookingController>
+
+        // GET Booking
         [HttpGet]
-        public ActionResult GetBookings()
+        [ProducesResponseType(typeof(IEnumerable<Booking>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<Booking>>> GetBookings()
         {
             try
             {
-                return Ok(_repository.GetAll());
+                var bookings = await _repository.GetAll();
+                return Ok(bookings);
             }
             catch (Exception)
             {
@@ -34,13 +38,17 @@ namespace BookingHandler.Controllers
             }
         }
 
-        // GET api/<BookingController/startdate>
-        [HttpGet("startdate")]
-        public ActionResult GetBookingsByStartDate()
+
+        // GET Booking/startdate
+        [Route("[action]", Name = "GetBookingsByStartDate")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Booking>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<Booking>>> GetBookingsByStartDate()
         {
             try
             {
-                return Ok(_repository.GetAllByStartDate());
+                var bookings = await _repository.GetAllByStartDate();
+                return Ok(bookings);
             }
             catch (Exception)
             {
@@ -49,13 +57,24 @@ namespace BookingHandler.Controllers
             }
         }
 
-        // GET api/<BookingController>/5
-        [HttpGet("{id}")]
-        public ActionResult GetBookingById(BookingDTO booking)
+
+        // GET Booking/5
+        [HttpGet("{id}", Name = "GetBooking")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Booking), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Booking>> GetBooking(long id)
         {
             try
             {
-                return Ok(_repository.Update(booking));
+                var booking = await _repository.Get(id);
+
+                if (booking == null)
+                {
+                    _logger.LogError($"Booking with id {id} not found.");
+                    return NotFound();
+                }
+
+                return Ok(booking);
             }
             catch (Exception)
             {

@@ -1,7 +1,8 @@
 using Microsoft.OpenApi.Models;
-using BookingHandler.Services;
-using BookingHandler.Repositories;
+
 using BookingHandler.Data;
+using BookingHandler.Repositories;
+using BookingHandler.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,16 +27,23 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Booking Handler Service", Version = "v1" });
 });
 
+#region Project Dependencies
+
+builder.Services.AddSingleton<IBookingContext, BookingContext>();
 builder.Services.AddSingleton<IBookingRepository, BookingRepository>();
-builder.Services.AddScoped<IBookingContext, BookingContext>();
+
+#endregion
 
 var app = builder.Build();
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Handler Service V1");
+});
 
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseCors(AllowSomeStuff);
 
 app.UseAuthorization();

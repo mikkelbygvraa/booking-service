@@ -7,13 +7,12 @@ namespace BookingHandler.Models
     {
         [BsonId]
         [BsonElement("_id")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public long? BookingId { get; set; }
+        public long BookingId { get; set; }
 
         [BsonElement("customer_name")]
         public string? CustomerName { get; set; }
 
-        [BsonElement("start_date"), BsonRepresentation(BsonType.DateTime)]
+        [BsonElement("start_date"), BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime? StartDate { get; set; }
 
         [BsonElement("start_address")]
@@ -22,7 +21,7 @@ namespace BookingHandler.Models
         [BsonElement("end_address")]
         public string? EndAddress { get; set; }
 
-        [BsonElement("time_stamp"), BsonRepresentation(BsonType.DateTime)]
+        [BsonElement("time_stamp"), BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime? Timestamp { get; set; }
     }
 }

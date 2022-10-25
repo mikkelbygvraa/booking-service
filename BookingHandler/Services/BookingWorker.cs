@@ -4,7 +4,7 @@ using System.Text.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using BookingHandler.Models;
-using BookingHandler.Repositories;
+using BookingHandler.Data.Repositories;
 
 namespace BookingHandler.Services;
 
