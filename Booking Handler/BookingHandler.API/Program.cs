@@ -1,8 +1,8 @@
 using Microsoft.OpenApi.Models;
 
 using BookingHandler.Data;
-using BookingHandler.Repositories;
 using BookingHandler.Services;
+using BookingHandler.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

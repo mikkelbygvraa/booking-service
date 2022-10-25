@@ -1,6 +1,6 @@
 services:
     booking-service-producer:  
-     image: mikkelbygvraa/booking-service-producer:latest-dev 
+     image: mikkelbygvraa/booking-service:latest-dev 
      ports:  
      - "8080:80" 
      environment: 
@@ -28,9 +28,15 @@ services:
      image: mongo
      restart: always
      ports:
-      - 27017:27017
+      - "27017:27017"
      volumes:
       - ~/mongo:/data/db
-     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    # - ${WEBAPP_STORAGE_HOME}/site:/data/db
+
+    # environment:
+    # - MONGO_INITDB_ROOT_USERNAME=root
+    # - MONGO_INITDB_ROOT_PASSWORD=example
+    
+volumes:
+  mongo:
+    driver: local
