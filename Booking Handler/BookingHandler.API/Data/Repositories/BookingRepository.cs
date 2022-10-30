@@ -14,11 +14,11 @@ namespace BookingHandler.Data.Repositories
     {
         Task<IEnumerable<Booking>> GetAll();
         Task<IEnumerable<Booking>> GetAllByStartDate();
-        Task<Booking> Get(long id);
+        Task<Booking> Get(string id);
 
         Task Create(Booking booking);
         Task<bool> Update(Booking booking);
-        Task<bool> Delete(long id);
+        Task<bool> Delete(string id);
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ namespace BookingHandler.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Booking> Get(long id)
+        public async Task<Booking> Get(string id)
         {
             return await _context
                 .BookingCollection
@@ -82,7 +82,7 @@ namespace BookingHandler.Data.Repositories
                 && result.ModifiedCount > 0;
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task<bool> Delete(string id)
         {
             var result = await _context
                 .BookingCollection
@@ -91,29 +91,5 @@ namespace BookingHandler.Data.Repositories
             return result.IsAcknowledged
                 && result.DeletedCount > 0;
         }
-
-
-        //#region IDisposable
-
-        //private bool disposed = false;
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    if (!disposed)
-        //    {
-        //        if (disposing)
-        //        {
-        //            _bookings.Clear();
-        //        }
-        //    }
-        //    disposed = true;
-        //}
-
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-
-        //#endregion
     }
 }

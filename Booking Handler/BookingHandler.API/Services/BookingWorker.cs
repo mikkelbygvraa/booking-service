@@ -22,8 +22,7 @@ public class BookingWorker : BackgroundService
     private static int _nextId = 1;
 
     /// <summary>
-    /// Create a worker service that receives a ILogger and 
-    /// environment configuration instance.
+    /// Create a worker service that receives a ILogger and environment configuration instance.
     /// <link>https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0</link>
     /// </summary>
     /// <param name="logger"></param>
@@ -70,7 +69,7 @@ public class BookingWorker : BackgroundService
 
             if (booking is not null)
             {
-                booking.BookingId = _nextId++;
+                booking.BookingId = _nextId++.ToString();
                 _logger.LogInformation("Processing booking {id} from {customer} ", booking.BookingId, booking.CustomerName);
 
                 _repository.Create(booking);

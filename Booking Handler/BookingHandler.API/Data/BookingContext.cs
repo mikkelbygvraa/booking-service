@@ -19,8 +19,6 @@ namespace BookingHandler.Data
                 configuration.GetValue<string>("DatabaseSettings:ConnectionStrings:container") :
                 configuration.GetValue<string>("DatabaseSettings:ConnectionStrings:local");
 
-            Console.WriteLine(connectionString);
-
             var client = new MongoClient(connectionString);
 
             var db = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
@@ -42,7 +40,7 @@ namespace BookingHandler.Data
                 {
                     new Booking()
                     {
-                        BookingId = 1,
+                        BookingId = "1",
                         CustomerName = "Simon",
                         StartDate = DateTime.Today,
                         StartAddress = "Start St. 1",
@@ -51,7 +49,7 @@ namespace BookingHandler.Data
                     },
                     new Booking()
                     {
-                        BookingId = 2,
+                        BookingId = "2",
                         CustomerName = "Søren",
                         StartDate = DateTime.Today,
                         StartAddress = "Start St. 10",

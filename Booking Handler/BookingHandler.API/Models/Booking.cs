@@ -3,11 +3,12 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BookingHandler.Models
 {
+    [Serializable, BsonIgnoreExtraElements]
     public class Booking
     {
         [BsonId]
-        [BsonElement("_id")]
-        public long BookingId { get; set; }
+        [BsonElement("_id"), BsonRepresentation(BsonType.ObjectId)]
+        public string BookingId { get; set; }
 
         [BsonElement("customer_name")]
         public string? CustomerName { get; set; }

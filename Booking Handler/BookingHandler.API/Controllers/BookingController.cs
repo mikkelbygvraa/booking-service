@@ -62,7 +62,7 @@ namespace BookingHandler.Controllers
         [HttpGet("{id}", Name = "GetBooking")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Booking), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Booking>> GetBooking(long id)
+        public async Task<ActionResult<Booking>> GetBooking(string id)
         {
             try
             {
