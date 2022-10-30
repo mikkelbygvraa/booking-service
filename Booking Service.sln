@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Booking Handler", "Booking Handler", "{88A6C604-2476-4938-A3E1-24A38FB695F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingHandler.API", "Booking Handler\BookingHandler.API\BookingHandler.csproj", "{E00F438B-4990-499F-B2D4-D02081F02258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingHandler.API", "Booking Handler\BookingHandler.API\BookingHandler.API.csproj", "{E00F438B-4990-499F-B2D4-D02081F02258}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingHandler.Tests", "Booking Handler\BookingHandler.Tests\BookingHandler.Tests.csproj", "{65883E04-3447-4C44-95E1-6AAE8428F42A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Booking Producer", "Booking Producer", "{2BF1BE8B-1CA2-4C03-A88C-BF410BA231C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingProducer.API", "Booking Producer\BookingProducer.API\BookingProducer.csproj", "{A693280A-0195-42CE-AAA1-BC19096CFCEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingProducer.API", "Booking Producer\BookingProducer.API\BookingProducer.API.csproj", "{A693280A-0195-42CE-AAA1-BC19096CFCEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingProducer.Tests", "Booking Producer\BookingProducer.Tests\BookingProducer.Tests.csproj", "{88413654-0BBA-492C-93A9-3F04E20A3EE6}"
 EndProject
@@ -37,6 +37,10 @@ Global
 		{88413654-0BBA-492C-93A9-3F04E20A3EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88413654-0BBA-492C-93A9-3F04E20A3EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88413654-0BBA-492C-93A9-3F04E20A3EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B088646-0FA6-4D5C-BE9C-397F7CB38728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B088646-0FA6-4D5C-BE9C-397F7CB38728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B088646-0FA6-4D5C-BE9C-397F7CB38728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B088646-0FA6-4D5C-BE9C-397F7CB38728}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

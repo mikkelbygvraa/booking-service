@@ -20,10 +20,15 @@
     <Description> 
       1.0.0 Updated with new Semantics 
       0.9.0 Booking Service Added to App 
-    </Description>
+    </Description> 
+    <UserSecretsId>fde057dc-9a38-46bd-a5e9-1f092dbc33e5</UserSecretsId> 
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS> 
+    <DockerfileContext>..\..</DockerfileContext> 
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>

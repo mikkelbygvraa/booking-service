@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookingProducer.API\BookingProducer.csproj" />
+    <ProjectReference Include="..\BookingProducer.API\BookingProducer.API.csproj" />
   </ItemGroup>
 
 </Project>
