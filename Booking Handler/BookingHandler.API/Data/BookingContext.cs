@@ -26,7 +26,7 @@ namespace BookingHandler.Data
 
             var db = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 
-            BookingCollection = db.GetCollection<Booking>(onfiguration.GetValue<string>("DatabaseSettings:CollectionName"));
+            BookingCollection = db.GetCollection<Booking>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
 
             // SeedData(BookingCollection);
         }
