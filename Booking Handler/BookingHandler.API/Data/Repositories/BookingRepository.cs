@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 
 using BookingHandler.Models;
-using BookingHandler.Data;
 
 namespace BookingHandler.Data.Repositories
 {

@@ -1,6 +1,9 @@
-﻿using MongoDB.Driver;
+﻿using System;
+
+using MongoDB.Driver;
+
 using BookingHandler.Models;
-using System;
+using Microsoft.Extensions.Configuration;
 
 namespace BookingHandler.Data
 {
@@ -23,7 +26,7 @@ namespace BookingHandler.Data
 
             var db = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 
-            BookingCollection = db.GetCollection<Booking>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
+            BookingCollection = db.GetCollection<Booking>(onfiguration.GetValue<string>("DatabaseSettings:CollectionName"));
 
             // SeedData(BookingCollection);
         }

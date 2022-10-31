@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-using BookingHandler.Models;
 using System.Net;
+
 using BookingHandler.Data.Repositories;
+using BookingHandler.Models;
 
 namespace BookingHandler.Controllers
 {
