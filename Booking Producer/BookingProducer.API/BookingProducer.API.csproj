@@ -14,17 +14,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyVersion>1.0.1.1</AssemblyVersion> 
-    <FileVersion>1.0.1.1</FileVersion> 
-    <InformationalVersion>1.0.0</InformationalVersion> 
-    <Description> 
-      1.0.0 Updated with new Semantics 
-      0.9.0 Booking Service Added to App 
-    </Description> 
-    <UserSecretsId>fde057dc-9a38-46bd-a5e9-1f092dbc33e5</UserSecretsId> 
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS> 
-    <DockerfileContext>..\..</DockerfileContext> 
-    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <FileVersion>1.0.1.1</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
+    <Description>
+      1.0.0 Updated with new Semantics
+      0.9.0 Booking Service Added to App
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>
